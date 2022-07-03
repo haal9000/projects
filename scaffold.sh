@@ -16,7 +16,11 @@ terraform version
 sed -i "s|{project_name}|magento-cloud-auto-deploy|g" providers.tf
 sed -i "s|{branch}|master|g" providers.tf
 
-apt-get install awscli -y
+curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip 
+./aws/install
+export PATH=$PATH:/usr/local/bin/aws
+
 mkdir -p ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/Linux_aarch64
 aws s3 cp s3://commerce-cloud-projects/Linux_aarch64/terraform-provider-commerce-cloud ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/Linux_aarch64
 chmod +x ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/Linux_aarch64/terraform-provider-commerce-cloud
