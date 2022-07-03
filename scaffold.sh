@@ -8,40 +8,33 @@
 # sudo apt update
 # sudo apt install terraform=1.2.2
 apt remove terraform
-wget https://releases.hashicorp.com/terraform/1.2.2/terraform_1.2.2_linux_amd64.zip
-unzip terraform_1.2.2_linux_amd64.zip
+# wget https://releases.hashicorp.com/terraform/1.2.2/terraform_1.2.2_linux_amd64.zip
+wget https://releases.hashicorp.com/terraform/1.2.4/terraform_1.2.4_linux_arm64.zip
+# unzip terraform_1.2.2_linux_amd64.zip
+unzip terraform_1.2.4_linux_arm64.zip
 mv terraform /usr/bin
 terraform version
 
 sed -i "s|{project_name}|magento-cloud-auto-deploy|g" providers.tf
 sed -i "s|{branch}|master|g" providers.tf
 
-rm -rf aws
-rm -rf /usr/local/aws-cli
-rm -rf /usr/bin/aws*
-# curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
-# unzip awscliv2.zip 
 echo $PWD
-
-ls
-# ./aws/install
-# chmod +x /usr/local/bin/aws
-# export PATH=$PATH:/usr/local/bin/aws
-# echo "####################################"
-# echo "PATH: $PATH"
-# /usr/local/bin/aws --version
-# echo "####################################"
 
 apt-get update
 apt-get install awscli -y
 
 aws --version
-aws s3 ls
 
 
-mkdir -p ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/linux_amd64
-aws s3 cp s3://commerce-cloud-projects/linux_amd64/terraform-provider-commerce-cloud ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/linux_amd64
-chmod +x ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/linux_amd64/terraform-provider-commerce-cloud
-cat providers.tf
+mkdir -p ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/linux_arm64
+aws s3 cp s3://commerce-cloud-projects/linux_arm64/terraform-provider-commerce-cloud ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/linux_arm64
+chmod +x ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/linux_arm64/terraform-provider-commerce-cloud
+ls -al ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/linux_arm64/
+
+# mkdir -p ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/linux_amd64
+# aws s3 cp s3://commerce-cloud-projects/linux_amd64/terraform-provider-commerce-cloud ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/linux_amd64
+# chmod +x ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/linux_amd64/terraform-provider-commerce-cloud
+# ls -al ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/linux_amd64/
+# cat providers.tf
 terraform init
 terraform apply -var "api_token=${COMMERCE_CLOUD_TOKEN}" -var "mage_composer_username=${MAGE_COMPOSER_USERNAME}" -var "mage_composer_password=${MAGE_COMPOSER_PASSWORD}" -var "github_token=${GH_TOKEN}" -var "title=magento-cloud-auto-deploy"
