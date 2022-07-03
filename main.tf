@@ -10,7 +10,7 @@ terraform {
 # }
 
 module "cloudbackend" {
-  source = "cloudbackend"
+  source = "./cloudbackend"
   providers = {
     adobecommercecloud = adobecommercecloud.root
    }
