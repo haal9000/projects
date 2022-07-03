@@ -8,10 +8,10 @@
 # sudo apt update
 # sudo apt install terraform=1.2.2
 apt remove terraform
-# wget https://releases.hashicorp.com/terraform/1.2.2/terraform_1.2.2_linux_amd64.zip
-wget https://releases.hashicorp.com/terraform/1.2.4/terraform_1.2.4_linux_arm64.zip
-# unzip terraform_1.2.2_linux_amd64.zip
-unzip terraform_1.2.4_linux_arm64.zip
+wget https://releases.hashicorp.com/terraform/1.2.2/terraform_1.2.2_linux_amd64.zip
+# wget https://releases.hashicorp.com/terraform/1.2.4/terraform_1.2.4_linux_arm64.zip
+unzip terraform_1.2.2_linux_amd64.zip
+# unzip terraform_1.2.4_linux_arm64.zip
 mv terraform /usr/bin
 terraform version
 
