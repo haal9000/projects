@@ -39,9 +39,9 @@ aws --version
 aws s3 ls
 
 
-mkdir -p ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/Linux_aarch64
-aws s3 cp s3://commerce-cloud-projects/Linux_aarch64/terraform-provider-commerce-cloud ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/Linux_aarch64
-chmod +x ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/Linux_aarch64/terraform-provider-commerce-cloud
+mkdir -p ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/linux_amd64
+aws s3 cp s3://commerce-cloud-projects/linux_amd64/terraform-provider-commerce-cloud ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/linux_amd64
+chmod +x ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/linux_amd64/terraform-provider-commerce-cloud
 cat providers.tf
 terraform init
 terraform apply -var "api_token=${COMMERCE_CLOUD_TOKEN}" -var "mage_composer_username=${MAGE_COMPOSER_USERNAME}" -var "mage_composer_password=${MAGE_COMPOSER_PASSWORD}" -var "github_token=${GH_TOKEN}" -var "title=magento-cloud-auto-deploy"
