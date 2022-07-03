@@ -29,11 +29,11 @@ chmod +x /usr/local/bin/aws
 export PATH=$PATH:/usr/local/bin/aws
 echo "####################################"
 echo "PATH: $PATH"
-aws --version
+/usr/local/bin/aws --version
 echo "####################################"
 
 mkdir -p ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/Linux_aarch64
-aws s3 cp s3://commerce-cloud-projects/Linux_aarch64/terraform-provider-commerce-cloud ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/Linux_aarch64
+/usr/local/bin/aws s3 cp s3://commerce-cloud-projects/Linux_aarch64/terraform-provider-commerce-cloud ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/Linux_aarch64
 chmod +x ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/Linux_aarch64/terraform-provider-commerce-cloud
 cat providers.tf
 terraform init
