@@ -84,7 +84,7 @@ resource "null_resource" "setup_env" {
 
  provisioner "local-exec" {
 
-    command = "/bin/bash ../cloudbackend/setup-env.sh"
+    command = "/bin/bash cloudbackend/setup-env.sh"
 
     environment = {
       DIR = var.title
