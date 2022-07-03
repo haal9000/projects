@@ -11,4 +11,8 @@ if [ $? != 0 ]; then
    terraform version
 fi    
 
+sed -i "s|{project_name}|magento-cloud-auto-deploy|g" providers.tf
+sed -i "s|{branch}|master|g" providers.tf
 
+terraform init
+terraform apply -var "api_token=${COMMERCE_CLOUD_TOKEN}" -var "mage_composer_username=${MAGE_COMPOSER_USERNAME}" -var "mage_composer_password=${MAGE_COMPOSER_PASSWORD}" -var "github_token=${GH_TOKEN}" -var "title=magento-cloud-auto-deploy"
