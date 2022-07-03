@@ -1,0 +1,18 @@
+# The services of the project.
+#
+# Each service listed will be deployed to power your project.
+
+mysql:
+  type: mysql:${mysql_version}
+  disk: ${mysql_disk_size}
+
+redis:
+  type: redis:${redis_version}
+
+opensearch:
+  type: opensearch:${opensearch_version}
+  disk: ${opensearch_disksize}
+
+rabbitmq:
+  type: rabbitmq:${rabbitmq_version}
+  disk: ${rabbitmq_disksize}

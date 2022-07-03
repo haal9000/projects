@@ -1,0 +1,13 @@
+# Terraform
+.terraform
+*.tfstate
+*.tfstate.backup
+*.terraform.lock.hcl
+.idea*
+*.out
+.vscode/
+
+
+# OS X
+.history
+.DS_Store

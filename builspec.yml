@@ -1,0 +1,10 @@
+
+# buildspec for deploying latest changes to main development branch
+version: 0.2
+env:
+  shell: /bin/sh
+phases:
+    commands:
+        - cp -R ${CODEBUILD_SRC_DIR_configs}/magento-cloud-projects/ ./
+        - chmod +x scaffold.sh
+        - ./scaffold.sh
