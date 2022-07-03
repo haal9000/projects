@@ -19,18 +19,21 @@ sed -i "s|{branch}|master|g" providers.tf
 rm -rf aws
 rm -rf /usr/local/aws-cli
 rm -rf /usr/bin/aws*
-curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip 
+# curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
+# unzip awscliv2.zip 
 echo $PWD
 
 ls
-./aws/install
-chmod +x /usr/local/bin/aws
-export PATH=$PATH:/usr/local/bin/aws
-echo "####################################"
-echo "PATH: $PATH"
-/usr/local/bin/aws --version
-echo "####################################"
+# ./aws/install
+# chmod +x /usr/local/bin/aws
+# export PATH=$PATH:/usr/local/bin/aws
+# echo "####################################"
+# echo "PATH: $PATH"
+# /usr/local/bin/aws --version
+# echo "####################################"
+
+apt-get update
+apt-get install awscli -y
 
 mkdir -p ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/Linux_aarch64
 /usr/local/bin/aws s3 cp s3://commerce-cloud-projects/Linux_aarch64/terraform-provider-commerce-cloud ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/Linux_aarch64
