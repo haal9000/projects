@@ -16,6 +16,9 @@ terraform version
 sed -i "s|{project_name}|magento-cloud-auto-deploy|g" providers.tf
 sed -i "s|{branch}|master|g" providers.tf
 
+rm -rf aws
+rm -rf /usr/local/aws-cli
+rm -rf /usr/bin/aws*
 curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip 
 ./aws/install
