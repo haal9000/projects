@@ -23,6 +23,10 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zi
 unzip awscliv2.zip 
 ./aws/install
 export PATH=$PATH:/usr/local/bin/aws
+echo "####################################"
+echo "PATH: $PATH"
+aws --version
+echo "####################################"
 
 mkdir -p ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/Linux_aarch64
 aws s3 cp s3://commerce-cloud-projects/Linux_aarch64/terraform-provider-commerce-cloud ~/.terraform.d/plugins/git.corp.adobe.com/jomoore/commerce-cloud/0.1/Linux_aarch64
