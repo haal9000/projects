@@ -21,7 +21,11 @@ rm -rf /usr/local/aws-cli
 rm -rf /usr/bin/aws*
 curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip 
+echo $pwd
+
+echo ls
 ./aws/install
+chmod +x /usr/local/bin/aws
 export PATH=$PATH:/usr/local/bin/aws
 echo "####################################"
 echo "PATH: $PATH"
