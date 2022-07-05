@@ -23,10 +23,9 @@ if [[ `git config --get remote.origin.url` != ${git_repo} ]]; then
     echo "##############################################"
     rm -rf && git clone ${magento_cloud_project} .
     rm -rf .git
-    #git init --initial-branch=master
-    #git init -b master
+    git config --global init.defaultBranch master
     git init
-    git branch -m main master
+    git branch -m master
 
     git remote add origin ${git_repo}
 elif [[ `git config --get remote.origin.url` == ${git_repo} ]]; then
@@ -39,10 +38,10 @@ elif [[ `git config --get remote.origin.url` == ${git_repo} ]]; then
 fi
 
 
-cp ../../cloudbackend/composer.json .
-mv ../../cloudbackend/configs/services.yaml .magento
+cp ../cloudbackend/composer.json .
+mv ../cloudbackend/configs/services.yaml .magento
 # rm -rf auth.json
-mv ../../cloudbackend/configs/auth.json .
+mv ../cloudbackend/configs/auth.json .
 composer update
 if [ -z "$(git status --porcelain)" ]; then 
   echo "Working directory clean. No changes to commit."
@@ -57,7 +56,7 @@ else
     echo "Cloud instance doesn't have a URL. Please check if environment is built without errors"
     exit 1
   else
-    cp ../../cloudbackend/configs/.magento.app.yaml . 
+    cp ../cloudbackend/configs/.magento.app.yaml . 
     echo "OS: ${OS}"
     if [[ $OS == 'Darwin' ]]; then
       sed -i "" "s|{MAGENTO_BACKEND_URL}|\'${MAGENTO_BACKEND_URL}\'|g" .magento.app.yaml
