@@ -25,7 +25,7 @@ if [[ `git config --get remote.origin.url` != ${git_repo} ]]; then
     rm -rf .git
     git config --global init.defaultBranch master
     git config user.email "platformsh@adobe.com"
-│   git config user.name "platformsh"
+    git config user.name "platformsh"
     git init
     git branch -m master
 
