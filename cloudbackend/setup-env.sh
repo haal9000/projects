@@ -23,8 +23,8 @@ if [[ `git config --get remote.origin.url` != ${git_repo} ]]; then
     echo "##############################################"
     rm -rf && git clone ${magento_cloud_project} .
     rm -rf .git
-    git init
     git config init.defaultBranch master
+    git init
     git config user.email "platformsh@adobe.com"
     git config user.name "platformsh"
     git branch -m master
