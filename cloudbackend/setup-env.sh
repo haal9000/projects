@@ -1,28 +1,48 @@
 #!/bin/bash
 
 OS=`uname`
+# repository url which contains the base template for commerce cloud project
 magento_cloud_project="git@github.com:magento-commerce/magento-cloud.git"
+
+# repository url for the project that will be created on commerce cloud
 git_repo="${PROJECT_ID}@git.us-4.magento.cloud:${PROJECT_ID}.git"
 branch="master"
 echo "GIT_REPO: ${git_repo}"
 
 
-if [ ! -d "$DIR" ]; then
-  # clone the project if it is not present.
-  mkdir -p ${DIR}
-  # git clone --branch master ${PROJECT_ID}@git.us-4.magento.cloud:${PROJECT_ID}.git ${DIR}
-fi
-cd ${DIR}
-echo "REMOTE ORIGIN URL: `git config --get remote.origin.url`"
 
-if [[ `git config --get remote.origin.url` != ${git_repo} ]]; then
+git ls-remote $git_repo
+retvalue=$?
 
+# If a local project directory does not exist and magento git project exists, it clones the repo 
+if [[ ! -d "$DIR" ]] && [[ $retvalue == 0 ]]; then
+    echo "##############################################"
+    echo "magento git project already exists. cloning the project"
+    echo "##############################################"
+    mkdir -p ${DIR}
+    cd ${DIR}
+    git clone ${git_repo} .
+    echo "REMOTE ORIGIN URL: `git config --get remote.origin.url`"
+# If a local project directory and magento git project both exist, it pulls the latest code    
+elif [[ -d "$DIR" ]] && [[ $retvalue == 0 ]]; then
+    cd ${DIR}
     echo "working directory:${DIR}"
     echo "##############################################"
-    echo "cloning magento cloud base project"
+    echo "pulling changes from existing project"
+    echo "##############################################"
+    echo "REMOTE ORIGIN URL: `git config --get remote.origin.url`"
+    git pull
+# creates a local project directory and clones the base template from commerce cloud project
+else
+    mkdir -p ${DIR}
+    cd ${DIR}
+    echo "working directory:${DIR}"
+    echo "##############################################"
+    echo "cloning base project template from magento cloud repository"
     echo "##############################################"
     rm -rf && git clone ${magento_cloud_project} .
     rm -rf .git
+    git config --global --unset init.defaultbranch
     git config init.defaultBranch master
     git init
     git config user.email "platformsh@adobe.com"
@@ -30,13 +50,7 @@ if [[ `git config --get remote.origin.url` != ${git_repo} ]]; then
     git branch -m master
 
     git remote add origin ${git_repo}
-elif [[ `git config --get remote.origin.url` == ${git_repo} ]]; then
-    echo "working directory:${DIR}"
-    echo "##############################################"
-    echo "pulling changes from existing project"
-    echo "##############################################"
-    # git clone ${git_repo} .
-    git pull
+    echo "REMOTE ORIGIN URL: `git config --get remote.origin.url`"
 fi
 
 
@@ -45,6 +59,8 @@ mv ../cloudbackend/configs/services.yaml .magento
 # rm -rf auth.json
 mv ../cloudbackend/configs/auth.json .
 composer update
+
+
 if [ -z "$(git status --porcelain)" ]; then 
   echo "Working directory clean. No changes to commit."
 else 
