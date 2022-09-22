@@ -15,7 +15,7 @@ terraform {
     bucket         = "commerce-cloud-projects"
     key            = "terraform/state/{project_name}/{branch}/terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "commercecloud-projects"
+    dynamodb_table = "{project_name}"
     profile        = "default"
   }
 }
